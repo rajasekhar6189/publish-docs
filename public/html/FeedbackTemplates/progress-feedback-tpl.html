@@ -1,0 +1,18 @@
+<style>
+    .md-toast-content {
+        background-color: rgb(16,108,200);
+    }
+    md-toast.md-top {
+        left: 50%;
+        margin-left: -150px;
+    }
+</style>
+<md-toast style="left : 30%; top : 50%" >
+    <md-content  layout="row" style="line-height: 50px; min-height: 50px; padding: 0px 15px; background-color: rgb(16,108,200); font-size: 16px; color: white;">
+        <div style="padding-top: 10px;">
+            <md-progress-circular class="md-warn md-hue-2" md-diameter="25"></md-progress-circular>
+        </div>
+
+        <span flex style="padding-left: 10px;" ng-bind="feedback.message"></span>
+    </md-content>
+</md-toast>

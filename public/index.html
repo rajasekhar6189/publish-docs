@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PubGenDocsPages">
+<head>
+    <meta charset="UTF-8">
+    <script>var appConfig  = appConfigValue</script>
+    <title>Developer Central Companion App</title>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans"></link>
+    <script src="/APIPublish/static/angular/angular.min.js"></script>
+    <script src="/APIPublish/static/angular-route/angular-route.min.js"></script>
+    <link rel="stylesheet" href="/APIPublish/static/angular-material/angular-material.min.css"></link>
+    <script src="/APIPublish/static/angular-material/angular-material.min.js"></script>
+    <script src="/APIPublish/static/angular-aria/angular-aria.min.js"></script>
+    <script src="/APIPublish/static/angular-animate/angular-animate.min.js"></script>
+    <script src="/APIPublish/static/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="/APIPublish/javascripts/controllers/MainController.js"></script>
+    <script src="/APIPublish/javascripts/controllers/FeedbackController.js"></script>
+    <script src="/APIPublish/javascripts/controllers/AddSwaggerController.js"></script>
+    <script src="/APIPublish/javascripts/controllers/UpdateSwaggerController.js"></script>
+    <script src="/APIPublish/javascripts/Services/CommonService.js"></script>
+
+</head>
+<body flex style="background-color: #FFFFFF;overflow: hidden">
+<md-toolbar style=" min-height:45px; background-color: #555555" layout="row">
+    <span style="margin-left: 30px; margin-top: 13px;font-family: DroidSans; font-weight: 800; font-size: 20px; color: #FFFFFF; line-height: 16px;">[24] </span>
+    <span style="color: #FFB549;margin-top: 13px;font-family: DroidSans; font-weight: 800; font-size: 20px;line-height: 16px;">7 </span>
+    <span style="margin: 13px; font-family: DroidSans; font-size: 18px; font-weight: 800; color: #FFFFFF; line-height: 16px;">Developer Central Companion App</span>
+</md-toolbar>
+<div style="height: 94%; overflow-x: hidden; overflow-y: scroll" layout="row">
+
+    <div flex="10">
+        <md-content
+                style="height: 100%; overflow: hidden; margin-left: 30px;  margin-top: 15px; background-color: #FFFFFF">
+
+        </md-content>
+    </div>
+    <div flex="85" ng-controller="MainController" >
+        <md-content style="background-color: #FFFFFF">
+            <div style="width: 65%; margin-top: 20px;" layout layout-align="left left">
+                <div flex style="height: 45px; margin-top:20px">
+
+                    <md-radio-group layout ='row' ng-model="selectedForm" style="margin-top: 5px;opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0" >
+                        <md-radio-button style="outline: none" value="addAPIProxy" ng-click="changeAPIProxyOpt('addAPIProxy')">Add API</md-radio-button>
+                        <md-radio-button style="outline: none" value="updateAPIProxy" ng-click="changeAPIProxyOpt('updateAPIProxy')">Update API</md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+            <div ng-view=""></div>
+        </md-content>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    document.domain = '247-inc.net';
+    window.addEventListener(
+        "message",
+        onReceiveAction,
+        false
+    );
+    function onReceiveAction(event) {
+        if(event.data.elemtID)
+            eval(event.data.elemtID);
+        if(event.data.javascript){
+            eval(event.data.javascript);
+            javascrFunction();
+        }
+
+    }
+</script>
+<style>
+    .submit-disable {
+        font-family: DroidSans-Bold;
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 1px;
+        height:51px;
+        width: 220px;
+        background-image: linear-gradient(-180deg, #cec9c4  0%, #cec9c4  100%);
+        box-shadow: 0 5px 30px 0 white;
+        border-radius: 2px;
+    }
+    .submit {
+        font-family: DroidSans-Bold;
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 1px;
+        height:51px;
+        width: 220px;
+        background-image: linear-gradient(-180deg, #FFB549 0%, #EF8822 100%);
+        box-shadow: 0 5px 30px 0 rgba(239,136,34,0.20);
+        border-radius: 2px;
+    }
+
+    md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
+        border-color : #6E6E6E
+    }
+    md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+        background-color: #6E6E6E;
+    }
+</style>

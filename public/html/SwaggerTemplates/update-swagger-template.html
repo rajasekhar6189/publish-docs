@@ -1,0 +1,154 @@
+<form name="updateModel" ng-init="initializeValidationMesg()"  style="width: 65%;">
+    <div  style="height: 95px" layout="column">
+        <span>
+            <label  style="opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;">
+                <span ng-bind="getProperty('labels.APIName')"> </span>
+            </label>
+        </span>
+        <span style="height: 10px"></span>
+        <div flex layout="row">
+            <select flex="95" ng-change="getModelDetails(APIProxyName)" name="APIProxyName" ng-model="APIProxyName" style="font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;background: #FFFFFF; border: 1px solid #9DA3A4; border-radius: 2px; height: 40px">
+                <option ng-repeat="model in modelsList"  ng-value="model.name">{{model.displayName}} </option>
+            </select>
+            <span flex="5"></span>
+        </div>
+
+    </div>
+    <div ng-if="APIProxyName">
+        <div layout="row" style="height: 50px;" >
+            <div layout="row">
+                <md-tooltip>
+                    <span ng-bind="getProperty('toolTip.sanboxProvided')"> </span>
+                </md-tooltip>
+                <span>
+                     <label style="margin-top: 15px; margin-right: 25px;opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 16px;color: #6E6E6E;letter-spacing: 0;">
+                        <span ng-bind="getProperty('labels.sandboxEnvi')"> </span>
+                    </label>
+                </span>
+                <div>
+                    <md-radio-group layout ='row' ng-model="model.isSandBoxAvailable" style="opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0" >
+                        <md-radio-button style="outline: none" value="true" ng-selected="true">
+                            <span ng-bind="getProperty('labels.Yes')"> </span>
+                        </md-radio-button>
+                        <md-radio-button style="outline: none" value="false" >
+                            <span ng-bind="getProperty('labels.No')"> </span>
+                        </md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+        </div>
+        <div  style="height: 95px" layout="column">
+        <span>
+            <label  style="opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;">
+               <span ng-bind="getProperty('labels.ApigeeProxyOrEndPoint')"> </span>
+            </label>
+        </span>
+            <span style="height: 10px"></span>
+            <div flex layout="row">
+                <input flex="95" ng-change="updateErrorMessages (model, 'proxyurl', 'invalidAPIProxyURl')" type="text"  align="bottom" style="padding-left: 10px; font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;background: #FFFFFF; border: 1px solid #9DA3A4; border-radius: 2px; height: 40px" ng-model="model.proxyurl" required>
+                <div flex="5" style="padding: 5px">
+                    <ng-md-icon  icon="help_outline" style="fill: #999999" size="30">
+                        <md-tooltip>
+                            <span ng-bind="getProperty('toolTip.deployedAPIProxy')"> </span>
+                        </md-tooltip>
+                    </ng-md-icon>
+                </div>
+            </div>
+            <div>
+                <span ng-show="clientSideModelValidaMesg.proxyurl.showMessage ? true : false" style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="clientSideModelValidaMesg.proxyurl.message"></span>
+                <span ng-show="serverSideValidationMessages.invalidAPIProxyURl.errorMessage ? true : false" style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="serverSideValidationMessages.invalidAPIProxyURl.errorMessage"></span>
+            </div>
+        </div>
+        <div  style="height: 95px" layout="column">
+            <span>
+                <label  style="opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;">
+                    <span ng-bind="getProperty('labels.ProxyJSON')"> </span>
+                </label>
+            </span>
+            <span style="height: 10px"></span>
+            <div flex layout="row">
+                <input flex="95" ng-change="updateErrorMessages(model, 'swaggerurl', 'invalidSwaggerURL')" type="text"  align="bottom" style="padding-left: 10px;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;background: #FFFFFF; border: 1px solid #9DA3A4; border-radius: 2px; height: 40px" ng-model="model.swaggerurl" required>
+                <div flex="5" style="padding: 5px">
+                    <ng-md-icon icon="help_outline" style="fill: #999999" size="30">
+                        <md-tooltip>
+                            <span ng-bind="getProperty('toolTip.swaggerURL')"> </span>
+                        </md-tooltip>
+                    </ng-md-icon>
+                </div>
+            </div>
+            <div>
+                <span ng-show="clientSideModelValidaMesg.swaggerurl.showMessage ? true : false" style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="clientSideModelValidaMesg.swaggerurl.message"></span>
+                <span ng-show="serverSideValidationMessages.invalidSwaggerURL.errorMessage ? true : false" style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="serverSideValidationMessages.invalidSwaggerURL.errorMessage"></span>
+            </div>
+        </div>
+        <div style="height: 95px" style="height: 95px" layout="column">
+             <label style="opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;">
+               <span ng-bind="getProperty('labels.product')"> </span>
+            </label>
+            <span style="height: 10px">
+        </span>
+            <div flex layout="row">
+                <select flex="95" required  ng-change="updateErrorMessages(model, 'product') ; changePlatform(model)" name="product" ng-model="model.product" style="font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;background: #FFFFFF; border: 1px solid #9DA3A4; border-radius: 2px; height: 40px">
+                    <option ng-repeat="product in products"  ng-value="product">{{product}} </option>
+                </select>
+                <span flex="55" ></span>
+            </div>
+            <div>
+                <span ng-show="clientSideModelValidaMesg.product.showMessage" style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="clientSideModelValidaMesg.product.message"></span>
+            </div>
+        </div>
+        <div ng-if ="model.product == getProperty('products.platform')"  style="height: 95px" style="height: 95px" layout="column">
+            <label style="opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;">
+                <span ng-bind="getProperty('labels.platform')"> </span>
+            </label>
+            <span style="height: 10px">
+        </span>
+            <div flex layout="row">
+                <select  flex="95" required  ng-change="updateErrorMessages(model, 'platform')" name="platform" ng-model="model.platform" style="font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;background: #FFFFFF; border: 1px solid #9DA3A4; box-shadow: 0 0 0px white; border-radius: 2px; height: 40px">
+                    <option ng-repeat="prod in platform"  ng-value="prod">{{prod}} </option>
+                </select>
+                <span flex="55" ></span>
+            </div>
+            <div>
+                <span ng-show="clientSideModelValidaMesg.platform.showMessage" style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="clientSideModelValidaMesg.platform.message"></span>
+            </div>
+        </div>
+        <div  style="height: 95px" layout="column">
+            <span>
+                <label  style="opacity: 0.7;font-weight: 600;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;">
+                    <span ng-bind="getProperty('labels.reviewerEmail')"> </span>
+                </label>
+            </span>
+            <span style="height: 10px"></span>
+            <div flex layout="row">
+                <input  flex=45 ng-change="updateErrorMessages(model, 'reviewer')" type="text"  align="bottom" style="padding-left: 10px;font-family: DroidSans;font-size: 14px;color: #6E6E6E;letter-spacing: 0;background: #FFFFFF; border: 1px solid #9DA3A4; border-radius: 2px; height: 40px" ng-model="model.reviewer" required>
+                <div flex="55" style="padding: 5px">
+                    <ng-md-icon flex="5" icon="help_outline" style="fill: #999999" size="30">
+                        <md-tooltip>
+                            <span ng-bind="getProperty('toolTip.reviewerEmail')"> </span>
+                        </md-tooltip>
+                    </ng-md-icon>
+                </div>
+            </div>
+            <div>
+                <span ng-show="clientSideModelValidaMesg.reviewer.showMessage ? true : false" style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="clientSideModelValidaMesg.reviewer.message"></span>
+            </div>
+        </div>
+        <div ng-if="serverSideValidationMessages.apiModelNotFound.errorMessage? true : false">
+            <span style="color: red;font-family: DroidSans;font-size: 14px;letter-spacing: 0;" ng-bind="serverSideValidationMessages.apiModelNotFound.errorMessage"></span>
+        </div>
+        <div flex layout="row">
+        <div flex="35"></div>
+        <md-button  flex="30"
+                    ng-class="submitDisable ? 'submit-disable' : 'submit'"
+                    ng-disabled="submitDisable"
+                    ng-click="update(updateModel, model)">
+            <span ng-bind="modelSubmit"></span>
+        </md-button>
+        <div flex="35"></div>
+    </div>
+    </div>
+</form>
+<style>
+
+</style>

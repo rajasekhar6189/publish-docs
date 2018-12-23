@@ -1,0 +1,23 @@
+<style>
+    .md-toast-content {
+        background-color : #EF4341
+    }
+</style>
+<md-toast style="left : 30%; top : 50%" >
+    <md-content layout="row" style="line-height: 50px; min-height: 50px;  padding: 0px 15px; background-color: #EF4341; font-size: 16px; color: white;">
+        <md-button style="padding-top: 8px;" ng-click="close()">
+            <ng-md-icon flex="5" icon="close" style="fill: white" size="30">
+
+            </ng-md-icon>
+        </md-button>
+        <div layout="column" style="padding-top: 10px;padding-top: 20px;line-height: 0px;">
+            <span flex ng-bind="feedback.message"></span>
+            <span ng-if="feedback.errorCode != 'invalidSwaggerJSON'" flex style="font-size: 13px" ng-bind="feedback.subMessage"></span>
+            <span ng-if="feedback.errorCode == 'invalidSwaggerJSON'" flex style="font-size: 13px" >
+                {{feedback.subMessage}}
+                <a href="http://stable.developer.247-inc.net/guidelines-swagger-specifications-apis" target="_blank">guideline</a>
+            </span>
+        </div>
+
+    </md-content>
+</md-toast>
